@@ -26,7 +26,7 @@ class AnalyticsController extends Controller
     } */
     public function index()
     {
-        $entries = Entrie::all();
+        $entries = Entrie::with('country')->limit(10)->get();
         
         return ['entries'=>$entries];
     }

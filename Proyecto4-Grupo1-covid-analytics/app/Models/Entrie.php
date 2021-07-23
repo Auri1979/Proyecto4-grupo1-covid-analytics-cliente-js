@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Entrie extends Model
 {
     use HasFactory;
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
 }
+
