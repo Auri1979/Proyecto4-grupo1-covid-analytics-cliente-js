@@ -1,33 +1,6 @@
-// console.log("hola estupidos")
-// const getNombreContinent = (idConti) => {
-//     fetch(`https://proyecto4-grupo1-covid-analytics.test/api/regions/${idConti}`)
-//     .then(res => {
-//         return res.json();
-//     })
-//     .then(regions => {
-//         console.log(regions);
-//     })
-// }
-// getNombreContinent(1);
-async function listado(){
-    return await apiCall('GET','https://proyecto4-grupo1-covid-analytics.test/api/entries',null)
-    
-}
+import listado from './Modules/llamadasApi.js';
 
-const apiCall = async(method, url) =>{
-    let config = {
-        method: method,
-        url: url,
-        
-    }
-    
-  const response = await axios(config);
-
-return response.data;
-
-}
-
-async function prueba(){
+async function listadoEntries(){
     let listados = await listado();
     console.log(listados.entries)
  for(let i = 0; i < 100; i++){
@@ -40,4 +13,4 @@ async function prueba(){
 
 }
 
-prueba()
+listadoEntries()
