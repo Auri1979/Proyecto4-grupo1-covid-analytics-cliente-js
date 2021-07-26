@@ -15,11 +15,13 @@ use App\Http\Controllers\AnalyticsController;
 |
 */
 
-Route::get('/entries', [AnalyticsController::class,'index']);
+Route::get('/entries', [AnalyticsController::class, 'index']);
 
 Route::get('/countries', [AnalyticsController::class,'index1']);
  
 Route::get('/regions', [AnalyticsController::class,'index2']);
+
+Route::get('/regions/{id}', [AnalyticsController::class,'getRegion']);
 /* 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

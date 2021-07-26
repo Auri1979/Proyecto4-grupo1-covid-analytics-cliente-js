@@ -26,9 +26,9 @@ class AnalyticsController extends Controller
     } */
     public function index()
     {
-        $entries = Entrie::with('country')->limit(10)->get();
+        $entries = Entrie::where('day', '=', 1)->where('month','=', 4)->paginate(15);
         
-        return ['entries'=>$entries];
+        return $entries;      
     }
     public function index1()
     {
@@ -41,6 +41,11 @@ class AnalyticsController extends Controller
     {
         $regions = Region::all();
         return ['regions'=>$regions];
+    }
+    public function getRegion($idRegion){
+        //dd($idRegion);
+        $region=Region::findOrFail($idRegion);
+        dd($region);
     }
 
     /**
