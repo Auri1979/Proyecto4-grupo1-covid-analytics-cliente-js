@@ -1,7 +1,7 @@
 
 const hostName = 'https://proyecto4-grupo1-covid-analytics.test/api/';
 
-async function listado(){
+async function dataEntries(){
     return await apiCall('GET',URL +'entries',null)
     
 }
@@ -20,5 +20,5 @@ return response.data;
 }
 
 export{
-    listado
+    dataEntries
 }

@@ -1,4 +1,4 @@
-import listado from './Modules/llamadasApi.js';
+import dataEntries from './Modules/llamadasApi.js';
 
 async function listadoEntries(){
     let listados = await listado();
