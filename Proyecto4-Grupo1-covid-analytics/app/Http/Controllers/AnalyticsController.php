@@ -15,7 +15,7 @@ class AnalyticsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    /* public function index()
+    public function index()
     {
         $entries = Entrie::all();
         $countries = Country::all();
@@ -23,9 +23,9 @@ class AnalyticsController extends Controller
         return ['entries'=>$entries,
                 'countries'=>$countries,
                 'regions'=>$regions];
-    } */
+    } 
     
-    public function date($date)
+     public function date($date)
     {
         $arrayDate = explode('-',$date); 
         $entries = Entrie::with('country')->where('day', '=', $arrayDate[0])->where('month','=', $arrayDate[1])->where('year', '=',$arrayDate[2])->paginate(15);
@@ -35,10 +35,25 @@ class AnalyticsController extends Controller
     public function dateAndCountry($date,$idCountry)
     {
         $arrayDate = explode('-',$date); 
-        $entries = Entrie::with('country')->where('day', '=', $arrayDate[0])->where('month','=', $arrayDate[1])->where('year', '=',$arrayDate[2])->where('country_id', '=',$idCountry)->paginate(15);
+        $entries = Entrie::with('country')->where('day', '=', $arrayDate[0])->where('month','=', $arrayDate[1])->where('year', '=',$arrayDate[2])->where('country_id', '=',$idCountry);
         
         return $entries;      
+    } 
+    public function sumatorioDatosPaises()
+    {
+        $entries = Entrie::with('country') ->sum('cases');
+        $entriesDeaths = Entrie::with('country')->sum('deaths');
+        return ['cases'=>$entries, 'deaths'=>$entriesDeaths];
     }
+    public function sumatorioPais($id)
+    {
+        $entries = Entrie::with('country')->where('country_id','=', $id) ->sum('cases');
+        $entriesDeaths = Entrie::with('country')->where('country_id','=', $id)->sum('deaths');
+        $nameCountry = Entrie::with('country')->where('country_id','=', $id)->limit(1)->get();
+        return ['nombre de pais'=>$nameCountry->'cases'=>$entries, 'deaths'=>$entriesDeaths];
+        
+    }
+
 
     public function index1()
     {

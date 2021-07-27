@@ -15,9 +15,13 @@ use App\Http\Controllers\AnalyticsController;
 |
 */
 
-Route::get('/entries/{dates}', [AnalyticsController::class, 'date']);
+ Route::get('/entries/{dates}', [AnalyticsController::class, 'date']);
 
-Route::get('/entries/fecha/{dates}/pais/{id}', [AnalyticsController::class, 'dateAndCountry']);
+Route::get('/entries/date/{dates}/country/{id}', [AnalyticsController::class, 'dateAndCountry']); 
+
+Route::get('/suma', [AnalyticsController::class, 'sumatorioDatosPaises']);
+
+Route::get('/paisSuma/{country}', [AnalyticsController::class, 'sumatorioPais']);
 
 Route::get('/countries', [AnalyticsController::class,'index1']);
  
