@@ -28,7 +28,7 @@ class AnalyticsController extends Controller
     public function index($date)
     {
     
-        $arrayDate = explode('/',$date); 
+        $arrayDate = explode('/',(string)$date); 
         $entries = Entrie::where('day', '=', $arrayDate[0])->where('month','=', $arrayDate[1])->where('year', '=',$arrayDate[2])->paginate(15);
         
         return $entries;      

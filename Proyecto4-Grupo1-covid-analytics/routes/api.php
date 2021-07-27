@@ -15,7 +15,7 @@ use App\Http\Controllers\AnalyticsController;
 |
 */
 
-Route::get('/entries/{date}', [AnalyticsController::class, 'index']);
+Route::get('/entries/{dates}', [AnalyticsController::class, 'index']);
 
 Route::get('/countries', [AnalyticsController::class,'index1']);
  
