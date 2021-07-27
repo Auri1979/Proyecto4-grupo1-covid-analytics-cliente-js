@@ -24,9 +24,9 @@ class AnalyticsController extends Controller
                 'countries'=>$countries,
                 'regions'=>$regions];
     } */
-    public function index()
+    public function index($day,$month,$year)
     {
-        $entries = Entrie::where('day', '=', 1)->where('month','=', 4)->paginate(15);
+        $entries = Entrie::where('day', '=', $day)->where('month','=', $month)->where('year', '=',$year)->paginate(15);
         
         return $entries;      
     }
