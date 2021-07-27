@@ -47,14 +47,17 @@ class AnalyticsController extends Controller
     }
     public function sumatorioPais($id)
     {
-        $entries = Entrie::with('country')->where('country_id','=', $id) ->sum('cases');
+        $entry = Entrie::with('country')->where('country_id','=', $id)->get();
+        /* $entries = Entrie::with('country')->where('country_id','=', $id)->sum('cases');
         $entriesDeaths = Entrie::with('country')->where('country_id','=', $id)->sum('deaths');
-        $nameCountry = Entrie::with('country')->where('country_id','=', $id)->limit(1)->get();
-        return ['nombre de pais'=>$nameCountry->'cases'=>$entries, 'deaths'=>$entriesDeaths];
-        
+        $nameCountry = Entrie::with('country')->where('country_id','=', $id)->limit(1)->get(); */
+        //return ['nombre de pais'=>$nameCountry,'cases'=>$entries, 'deaths'=>$entriesDeaths];
+        return [
+                    'nombre de pais'=>$entry->first()->country->countriesAndTerritories,
+                    'cases'=>$entry->sum('cases'), 
+                    'deaths'=>$entry->sum('deaths')
+                ];
     }
-
-
     public function index1()
     {
         
