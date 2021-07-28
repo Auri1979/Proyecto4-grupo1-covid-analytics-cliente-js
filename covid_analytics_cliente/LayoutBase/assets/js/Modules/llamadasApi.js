@@ -18,6 +18,10 @@ async function getStatsByCountry(countryId){
     
 }
 
+async function getRandomCountries(){
+    return await apiCall('GET',hostName+'/countries',null)
+}
+
 
 const apiCall = async(method, url) =>{
     let config = {
@@ -36,5 +40,6 @@ export{
     getEntriesByDate,
     getEntriesByDateAndCountry,
     getStats,
-    getStatsByCountry
+    getStatsByCountry,
+    getRandomCountries
 }

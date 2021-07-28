@@ -24,4 +24,7 @@ Route::prefix('entries')->group(function () {
     Route::get('/stats', [AnalyticsController::class, 'getStats']);
     
     Route::get('/stats/byCountry/{country_id}', [AnalyticsController::class, 'getStatsByCountry']);
+   
+    Route::get('/countries',[AnalyticsController::class, 'getCountries']);
 });
+

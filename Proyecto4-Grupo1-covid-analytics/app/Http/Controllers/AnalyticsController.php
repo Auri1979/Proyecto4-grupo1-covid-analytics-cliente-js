@@ -81,5 +81,13 @@ class AnalyticsController extends Controller
                ];
     }
     
+    public function getCountries(){
+        
+        $countries = Entrie::with('country')->get();
+                    
+    
+    return $countries;
+
+    }
 
 }
