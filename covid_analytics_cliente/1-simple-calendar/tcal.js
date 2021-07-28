@@ -14,7 +14,7 @@ var A_TCALCONF = {
 	'nextyear'   : 'Next Year',
 	'prevmonth'  : 'Previous Month',
 	'nextmonth'  : 'Next Month',
-	'format'     : 'm/d/Y' // 'd-m-Y', Y-m-d', 'l, F jS Y'
+	'format'     : 'd-m-Y' // 'd-m-Y', Y-m-d', 'l, F jS Y'
 };
 
 var A_TCALTOKENS = [
@@ -328,6 +328,8 @@ function f_tcalInit () {
 function f_tcalAddOnload (f_func) {
 	if (document.addEventListener) {
 		window.addEventListener('load', f_func, false);
+
+		
 	}
 	else if (window.attachEvent) {
 		window.attachEvent('onload', f_func);
@@ -347,3 +349,10 @@ function f_tcalAddOnload (f_func) {
 }
 
 f_tcalAddOnload (f_tcalInit);
+let clickeo = document.querySelector('tcalInput');
+console.log(clickeo)
+// clickeo.addEventListener('click',pruebaMi,false)
+function pruebaMi(){
+let prueba = document.getElementsByTagName('input');
+console.log(prueba.value)
+}

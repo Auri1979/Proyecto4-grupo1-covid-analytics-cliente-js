@@ -18,7 +18,8 @@ class AnalyticsController extends Controller
                             ->where('day', '=', $arrayDate[0])
                             ->where('month','=', $arrayDate[1])
                             ->where('year', '=',$arrayDate[2])
-                            ->paginate(15);
+                            ->get();
+                            
         
         return [
             'data' => $entries,
