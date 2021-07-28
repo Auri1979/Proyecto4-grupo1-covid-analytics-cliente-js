@@ -15,21 +15,13 @@ use App\Http\Controllers\AnalyticsController;
 |
 */
 
- Route::get('/entries/{dates}', [AnalyticsController::class, 'date']);
 
-Route::get('/entries/date/{dates}/country/{id}', [AnalyticsController::class, 'dateAndCountry']); 
-
-Route::get('/suma', [AnalyticsController::class, 'sumatorioDatosPaises']);
-
-Route::get('/paisSuma/{country}', [AnalyticsController::class, 'sumatorioPais']);
-
-Route::get('/countries', [AnalyticsController::class,'index1']);
- 
-Route::get('/regions', [AnalyticsController::class,'index2']);
-
-Route::get('/regions/{id}', [AnalyticsController::class,'getRegion']);
-/* 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('entries')->group(function () {
+    Route::get('/byDate/{date}', [AnalyticsController::class, 'getEntriesByDate']);
+    
+    Route::get('/byDate/{date}/byCountry/{id}', [AnalyticsController::class, 'getEntriesByDateAndCountry']); 
+    
+    Route::get('/stats', [AnalyticsController::class, 'getStats']);
+    
+    Route::get('/stats/byCountry/{country_id}', [AnalyticsController::class, 'getStatsByCountry']);
 });
- */

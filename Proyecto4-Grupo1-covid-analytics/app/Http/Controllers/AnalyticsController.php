@@ -10,135 +10,67 @@ use App\Models\Country;
 
 class AnalyticsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $entries = Entrie::all();
-        $countries = Country::all();
-        $regions = Region::all();
-        return ['entries'=>$entries,
-                'countries'=>$countries,
-                'regions'=>$regions];
-    } 
     
-     public function date($date)
+    public function getEntriesByDate($date)
     {
-        $arrayDate = explode('-',$date); 
-        $entries = Entrie::with('country')->where('day', '=', $arrayDate[0])->where('month','=', $arrayDate[1])->where('year', '=',$arrayDate[2])->paginate(15);
+        $arrayDate = explode('-',$date);
+        $entries = Entrie::with('country')
+                            ->where('day', '=', $arrayDate[0])
+                            ->where('month','=', $arrayDate[1])
+                            ->where('year', '=',$arrayDate[2])
+                            ->paginate(15);
         
-        return $entries;      
-    }
-    public function dateAndCountry($date,$idCountry)
-    {
-        $arrayDate = explode('-',$date); 
-        $entries = Entrie::with('country')->where('day', '=', $arrayDate[0])->where('month','=', $arrayDate[1])->where('year', '=',$arrayDate[2])->where('country_id', '=',$idCountry);
-        
-        return $entries;      
-    } 
-    public function sumatorioDatosPaises()
-    {
-        $entries = Entrie::with('country') ->sum('cases');
-        $entriesDeaths = Entrie::with('country')->sum('deaths');
-        return ['cases'=>$entries, 'deaths'=>$entriesDeaths];
-    }
-    public function sumatorioPais($id)
-    {
-        $entry = Entrie::with('country')->where('country_id','=', $id)->get();
-        /* $entries = Entrie::with('country')->where('country_id','=', $id)->sum('cases');
-        $entriesDeaths = Entrie::with('country')->where('country_id','=', $id)->sum('deaths');
-        $nameCountry = Entrie::with('country')->where('country_id','=', $id)->limit(1)->get(); */
-        //return ['nombre de pais'=>$nameCountry,'cases'=>$entries, 'deaths'=>$entriesDeaths];
         return [
-                    'nombre de pais'=>$entry->first()->country->countriesAndTerritories,
-                    'cases'=>$entry->sum('cases'), 
-                    'deaths'=>$entry->sum('deaths')
+            'data' => $entries,
+            'status' => 200
+        ];     
+    }
+
+    public function getEntriesByDateAndCountry($date,$idCountry)
+    {
+        $arrayDate = explode('-',$date);
+
+        $entries = Entrie::with('country')
+                            ->where('day', '=', $arrayDate[0])
+                            ->where('month','=', $arrayDate[1])
+                            ->where('year', '=',$arrayDate[2])
+                            ->where('country_id', '=',$idCountry)
+                            ->get();
+        
+        return [
+            'data' => $entries,
+            'status' => 200
+        ];    
+    } 
+
+    public function getStats()
+    {
+        $entries = Entrie::select('country_id',Entrie::raw('SUM(cases) as cases','SUM(deaths) as deaths'))
+                            ->groupBy('country_id')
+                            ->get();
+        return [
+                'data' => $entries,
+                'status' => 200
+            ];
+    }
+
+    public function getStatsByCountry($id)
+    {
+
+        $entry = Entrie::with('country')
+                        ->where('country_id','=', $id)
+                        ->get();
+    
+        return [
+                    'data' => [
+                        'country_name'=>$entry->first()->country->countriesAndTerritories,
+                        'cases'=>$entry->sum('cases'), 
+                        'deaths'=>$entry->sum('deaths')
+                    ],
+                    'status' => 200
+                    
                 ];
     }
-    public function index1()
-    {
-        
-        $countries = Country::all();
-       
-        return ['countries'=>$countries];
-    }
-    public function index2()
-    {
-        $regions = Region::all();
-        return ['regions'=>$regions];
-    }
-    public function getRegion($idRegion){
-        //dd($idRegion);
-        $region=Region::findOrFail($idRegion);
-        dd($region);
-    }
+    
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
