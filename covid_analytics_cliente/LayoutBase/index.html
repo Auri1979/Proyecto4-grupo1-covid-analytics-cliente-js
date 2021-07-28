@@ -27,6 +27,9 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="assets/css/themes/all-themes.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/covid_analytics_cliente/1-simple-calendar/tcal.css" />
+	<script type="text/javascript" src="/covid_analytics_cliente/1-simple-calendar/tcal.js"></script> 
+
 </head>
 
 <body class="theme-red">
@@ -513,6 +516,10 @@
                     <div class="card">
                         <div class="header">
                             <h2>BROWSER USAGE</h2>
+                            <form action="#">
+                                <!-- add class="tcal" to your input field -->
+                                <div><input type="text" name="date" class="tcal" value="" /></div>
+                            </form>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
