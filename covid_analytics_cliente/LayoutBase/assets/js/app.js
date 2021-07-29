@@ -26,33 +26,28 @@ async function listadoEntries() {
 
     let listados = await getEntriesByDate(result);
     for (let i = 0; i < 150; i++) {
-      listData.innerHTML += `<li>Pais:${listados.data[i].country.countriesAndTerritories} Casos :${listados.data[i].cases}</li>`;
-    }
-     
+    
+  let listCountries = document.getElementById('listCountries');
+ 
+ 
+  listCountries.innerHTML += `  <tr>
+  <td>${listados.data[i].country_id}</td>
+  <td>${listados.data[i].country.countriesAndTerritories}</td>
+  <td><span class="label bg-green">${listados.data[i].country.geoId}</span></td>
+  <td>${listados.data[i].dateRep}</td>
+  <td>
+      <div class="progress">
+          <div class="progress-bar bg-green" id="barraRosa" role="progressbar" aria-valuenow="${listados.data[i].cases}" aria-valuemin="0" aria-valuemax="1000" style="width: ${listados.data[i].cases}%"></div>
+      </div>
+  </td>
+</tr>`
+}
 
   }
   
 }
 
-async function listCountries(){
-  let countries = await getRandomCountries();
-  let listCountries = document.getElementById('listCountries');
-  for(let i = 0; i < 5; i++){
-  let randomNumber = Math.floor(Math.random() * 57000);
-  listCountries.innerHTML += `  <tr>
-  <td>${countries[randomNumber].country_id}</td>
-  <td>${countries[randomNumber].country.countriesAndTerritories}</td>
-  <td><span class="label bg-green">${countries[randomNumber].country.geoId}</span></td>
-  <td>${countries[randomNumber].dateRep}</td>
-  <td>
-      <div class="progress">
-          <div class="progress-bar bg-green" id="barraRosa" role="progressbar" aria-valuenow="${countries[randomNumber].cases}" aria-valuemin="0" aria-valuemax="1000" style="width: ${countries[randomNumber].cases}%"></div>
-      </div>
-  </td>
-</tr>`
-}
-}
-listCountries();
+
 let btnCalendar = document.getElementById('btnCalendar');
 btnCalendar.addEventListener('click', listadoEntries, false);
 
