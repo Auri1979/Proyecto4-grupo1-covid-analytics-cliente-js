@@ -10,7 +10,7 @@ import {
 async function listCountries() {
     let countries = await getRandomCountries();
     for (let i = 0; i < 10; i++) {
-        let randomNumber = Math.floor(Math.random() * 57000);
+        let randomNumber = Math.floor(Math.random() * 212);
         var chBar = document.getElementById("chLine");
         var chartData = {
           labels: [''+countries[randomNumber].country.countriesAndTerritories+'',''+countries[2].country.countriesAndTerritories+''],

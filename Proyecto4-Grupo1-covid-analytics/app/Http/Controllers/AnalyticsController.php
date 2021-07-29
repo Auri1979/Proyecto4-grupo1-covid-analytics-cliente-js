@@ -44,21 +44,19 @@ class AnalyticsController extends Controller
         ];    
     } 
 
+   
     public function getStats()
     {
-        $entries = Entrie::select('country_id',Entrie::raw('SUM(cases) as cases'),Entrie::raw('SUM(deaths) as deaths'))
-                            ->groupBy('country_id')
-                            
-                            ->get();
-                            return [
-                                'data' => [
-                                    'country_name'=>$entries->country->countriesAndTerritories,
-                                    'cases'=>$entries->cases, 
-                                    'deaths'=>$entries->deaths,
-                                ],
-                                'status' => 200
-                                
-                            ];
+        $entries = Entrie::with('country')->select('country_id', Entrie::raw('SUM(cases) as cases'), Entrie::raw('SUM(deaths) as deaths'))
+            ->groupBy('country_id')
+            
+            ->get();
+           
+         return  [
+            'data' => $entries,
+            'status' => 200
+
+         ];
     }
 
     public function getStatsByCountry($id)

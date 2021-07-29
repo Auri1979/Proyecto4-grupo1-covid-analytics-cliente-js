@@ -439,10 +439,11 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Paises</th>
+                                            <th>Pais</th>
                                             <th>geoId</th>
                                             <th>dateRep</th>
-                                            <th>Progress</th>
+                                            <th>Cases</th>
+                                            <th>Deaths</th>
                                             
                                         </tr>
                                     </thead>
@@ -462,15 +463,16 @@
                         <div class="header">
                             <h2>BROWSER USAGE</h2>
                            <input type="date" id="calendar">
-                           <select name="OS">
-                            <option value="1">Windows Vista</option> 
-                            <option value="2">Windows 7</option> 
-                            <option value="3">Windows XP</option>
-                            <option value="10">Fedora</option> 
-                            <option value="11">Debian</option> 
-                            <option value="12">Suse</option> 
+                           <select id="country">
+                            <option value="8">Angola</option> 
+                            <option value="9">Burkina_Faso</option> 
+                            <option value="10">Burundi</option>
+                            <option value="11">Benin</option> 
+                            <option value="12">Botswana</option> 
+                            <option value="15">Congo</option> 
                          </select>
                            <button type="button" id="btnCalendar"class="btn btn-primary">Consultar</button>
+                           <button type="button" id="btnSum"class="btn btn-primary">Total datos de este pais</button> 
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
