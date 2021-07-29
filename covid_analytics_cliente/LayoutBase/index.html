@@ -443,9 +443,11 @@
                                             <th>geoId</th>
                                             <th>dateRep</th>
                                             <th>Progress</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody id="listCountries">
+                                        
                                        
                                     </tbody>
                                 </table>
@@ -460,6 +462,14 @@
                         <div class="header">
                             <h2>BROWSER USAGE</h2>
                            <input type="date" id="calendar">
+                           <select name="OS">
+                            <option value="1">Windows Vista</option> 
+                            <option value="2">Windows 7</option> 
+                            <option value="3">Windows XP</option>
+                            <option value="10">Fedora</option> 
+                            <option value="11">Debian</option> 
+                            <option value="12">Suse</option> 
+                         </select>
                            <button type="button" id="btnCalendar"class="btn btn-primary">Consultar</button>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
@@ -475,7 +485,7 @@
                             </ul>
                         </div>
                         <div class="body">
-                            <p id="listData"></p>
+                            <p id="listData"><canvas id="chLine" height="100"></canvas></p>
                             <div id="donut_chart" class="dashboard-donut-chart"></div>
                         </div>
                     </div>
@@ -502,6 +512,7 @@
     <script src="assets/js/pages/index.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="module" src="assets/js/app.js"></script>
+    
 
 
 </body>

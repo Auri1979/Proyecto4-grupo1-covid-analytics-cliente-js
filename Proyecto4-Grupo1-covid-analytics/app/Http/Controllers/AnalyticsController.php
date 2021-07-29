@@ -83,7 +83,7 @@ class AnalyticsController extends Controller
     
     public function getCountries(){
         
-        $countries = Entrie::with('country')->get();
+        $countries = Entrie::with('country')->paginate(15);
                     
     
     return $countries;

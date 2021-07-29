@@ -1,126 +1,57 @@
 
-import getRandomCountries from'./Modules/llamadasApi.js';
+import {
+    getEntriesByDate,
+    getEntriesByDateAndCountry,
+    getStats,
+    getStatsByCountry,
+    getRandomCountries
+  } from './Modules/llamadasApi.js';
 
 async function listCountries() {
     let countries = await getRandomCountries();
     for (let i = 0; i < 10; i++) {
         let randomNumber = Math.floor(Math.random() * 57000);
-        $(function () {
-            new Chart(document.getElementById("line_chart").getContext("2d"), getChartJs('line'));
-            new Chart(document.getElementById("bar_chart").getContext("2d"), getChartJs('bar'));
-            new Chart(document.getElementById("radar_chart").getContext("2d"), getChartJs('radar'));
-            new Chart(document.getElementById("pie_chart").getContext("2d"), getChartJs('pie'));
-        });
-        
-        function getChartJs(type) {
-            var config = null;
-        
-            if (type === 'line') {
-                config = {
-                    type: 'line',
-                    data: {
-                        labels: [""+countries[randomNumber].country.countriesAndTerritories+"", "February", "March", "April", "May", "June", "July"],
-                        datasets: [{
-                            label: "My First dataset",
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                            borderColor: 'rgba(0, 188, 212, 0.75)',
-                            backgroundColor: 'rgba(0, 188, 212, 0.3)',
-                            pointBorderColor: 'rgba(0, 188, 212, 0)',
-                            pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
-                            pointBorderWidth: 1
-                        }, {
-                                label: "My Second dataset",
-                                data: [28, 48, 40, 19, 86, 27, 90],
-                                borderColor: 'rgba(233, 30, 99, 0.75)',
-                                backgroundColor: 'rgba(233, 30, 99, 0.3)',
-                                pointBorderColor: 'rgba(233, 30, 99, 0)',
-                                pointBackgroundColor: 'rgba(233, 30, 99, 0.9)',
-                                pointBorderWidth: 1
-                            }]
-                    },
-                    options: {
-                        responsive: true,
-                        legend: false
-                    }
+        var chBar = document.getElementById("chLine");
+        var chartData = {
+          labels: [''+countries[randomNumber].country.countriesAndTerritories+'',''+countries[2].country.countriesAndTerritories+''],
+          datasets: [{
+            data: [589, 445, 483, 503, 689, 692, 634],
+            backgroundColor: colors[0]
+          },
+          {
+            data: [209, 245, 383, 403, 589, 692, 580],
+            backgroundColor: colors[1]
+          },
+          {
+            data: [489, 135, 483, 290, 189, 603, 600],
+            backgroundColor: colors[2]
+          },
+          {
+            data: [639, 465, 493, 478, 589, 632, 674],
+            backgroundColor: colors[4]
+          }]
+        };
+        if (chBar) {
+          new Chart(chBar, {
+          type: 'bar',
+          data: chartData,
+          options: {
+            scales: {
+              xAxes: [{
+                barPercentage: 0.4,
+                categoryPercentage: 0.5
+              }],
+              yAxes: [{
+                ticks: {
+                  beginAtZero: false
                 }
+              }]
+            },
+            legend: {
+              display: false
             }
-            else if (type === 'bar') {
-                config = {
-                    type: 'bar',
-                    data: {
-                        labels: ["January", "February", "March", "April", "May", "June", "July"],
-                        datasets: [{
-                            label: "My First dataset",
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                            backgroundColor: 'rgba(0, 188, 212, 0.8)'
-                        }, {
-                                label: "My Second dataset",
-                                data: [28, 48, 40, 19, 86, 27, 90],
-                                backgroundColor: 'rgba(233, 30, 99, 0.8)'
-                            }]
-                    },
-                    options: {
-                        responsive: true,
-                        legend: false
-                    }
-                }
-            }
-            else if (type === 'radar') {
-                config = {
-                    type: 'radar',
-                    data: {
-                        labels: ["January", "February", "March", "April", "May", "June", "July"],
-                        datasets: [{
-                            label: "My First dataset",
-                            data: [65, 25, 90, 81, 56, 55, 40],
-                            borderColor: 'rgba(0, 188, 212, 0.8)',
-                            backgroundColor: 'rgba(0, 188, 212, 0.5)',
-                            pointBorderColor: 'rgba(0, 188, 212, 0)',
-                            pointBackgroundColor: 'rgba(0, 188, 212, 0.8)',
-                            pointBorderWidth: 1
-                        }, {
-                                label: "My Second dataset",
-                                data: [72, 48, 40, 19, 96, 27, 100],
-                                borderColor: 'rgba(233, 30, 99, 0.8)',
-                                backgroundColor: 'rgba(233, 30, 99, 0.5)',
-                                pointBorderColor: 'rgba(233, 30, 99, 0)',
-                                pointBackgroundColor: 'rgba(233, 30, 99, 0.8)',
-                                pointBorderWidth: 1
-                            }]
-                    },
-                    options: {
-                        responsive: true,
-                        legend: false
-                    }
-                }
-            }
-            else if (type === 'pie') {
-                config = {
-                    type: 'pie',
-                    data: {
-                        datasets: [{
-                            data: [225, 50, 100, 40],
-                            backgroundColor: [
-                                "rgb(233, 30, 99)",
-                                "rgb(255, 193, 7)",
-                                "rgb(0, 188, 212)",
-                                "rgb(139, 195, 74)"
-                            ],
-                        }],
-                        labels: [
-                            "Pink",
-                            "Amber",
-                            "Cyan",
-                            "Light Green"
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        legend: false
-                    }
-                }
-            }
-            return config;
+          }
+          });
         }
     }
 }

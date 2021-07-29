@@ -31,6 +31,7 @@ async function listadoEntries() {
      
 
   }
+  
 }
 
 async function listCountries(){
