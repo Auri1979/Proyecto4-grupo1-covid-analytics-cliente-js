@@ -80,6 +80,7 @@ async function listCountriesByDate() {
 async function getStatsCountries() {
     let statsCountries = await getStats();
     let labels = []
+    console.log(statsCountries)
 
     for (let i = 0; i < 7; i++) {
         let randomNumber = Math.floor(Math.random() * 212);
