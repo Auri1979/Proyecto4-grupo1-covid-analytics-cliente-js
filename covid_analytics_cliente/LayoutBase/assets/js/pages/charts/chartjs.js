@@ -27,7 +27,8 @@ async function listCountriesByDate() {
         let countries = await getEntriesByDate(result);
         let labels = [];
         for (let i = 0; i < 10; i++) {
-            labels.push(countries.data[i])
+            let randomNumber = Math.floor(Math.random() * 195)
+            labels.push(countries.data[randomNumber])
 
 
 
